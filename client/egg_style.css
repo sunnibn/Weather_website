@@ -1,0 +1,32 @@
+﻿span + span {
+    margin-left: 15px;
+}
+
+.scrollbox {
+    max-height: 300px;
+    max-width: 500px;
+    background-color: none;
+    border: 2px solid darkred;
+    padding: 30px;
+    margin: 10px;
+    overflow: auto;
+}
+
+.text-break {
+    padding: 5px;
+}
+
+.redbox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    align-items: center;
+    background-color: black;
+    padding: 70px;
+    border: solid darkred;
+    color: lightgrey;
+    max-height: 500px;
+    max-width: 700px;
+}
