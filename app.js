@@ -114,7 +114,6 @@ app.get('/egg', function (req, res) {
 });
 
 app.get('/egg/getlogs', async function (req, res) {
-    console.log(logobj)
     res.send(logobj);
 });
 
@@ -168,6 +167,30 @@ app.post('/egg/send-amend', async function (req, res) {
         res.send({ "message": error.message });
     }
 });
+
+app.delete('/egg/delete', async function (req, res) {
+    try {
+        let index = req.query.index;
+        index = parseInt(index);
+        logobj.splice(index, 1);
+        await fs.writeFile(logpath, JSON.stringify(logobj, null, 2), function writeJSON(err) {
+            if (err) return console.log(err);
+        });
+        res.send('Deleted');
+    } catch (error) {
+        res.send({ "message": error.message });
+    }
+});
+/*app.delete('/egg/delete/:index', async function (req, res) {
+    try {
+        let index = req.query.index;
+        index = parseInt(index);
+        console.log(index)
+        res.send('delted')
+    } catch (error) {
+        res.send({ "message": error.message });
+    }
+});*/
 
 
 /*

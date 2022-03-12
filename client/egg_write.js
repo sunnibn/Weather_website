@@ -16,6 +16,10 @@ button.addEventListener('click', async function (event) {
 			headers: {"Content-Type": 'application/json'},
 			body: JSON.stringify(formAnswers, null, 2),
 		});
+		if (response.ok) {
+			window.alert('Submitted!');
+            location.href = "/egg";
+		}
 	} catch (error) {
 		alert("problem: " + error);
 	}

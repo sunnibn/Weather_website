@@ -1,41 +1,11 @@
 [
   {
-    "date": "2022-03-07",
-    "city": "mmm",
-    "weather": "Snow"
-  },
-  {
-    "date": "2022-03-07",
-    "city": "mindpalace",
-    "weather": "Snow"
-  },
-  {
-    "date": "2022-03-07",
+    "date": "2022-03-01",
     "city": "mindpalace",
     "weather": "Snow"
   },
   {
     "date": "2022-03-01",
-    "city": "qqq",
-    "weather": "Snow"
-  },
-  {
-    "date": "2022-03-02",
-    "city": "mindpalace",
-    "weather": "Hail"
-  },
-  {
-    "date": "2022-03-02",
-    "city": "mmmm",
-    "weather": "Snow"
-  },
-  {
-    "date": "2022-03-31",
-    "city": "sddd",
-    "weather": "Thunderstorm"
-  },
-  {
-    "date": "2022-03-31",
     "city": "mindpalace",
     "weather": "Thunderstorm"
   }

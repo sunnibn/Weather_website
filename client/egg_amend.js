@@ -11,7 +11,6 @@ window.addEventListener('load', async function (event) {
             if (dataJSON.message) {
                 throw new Error("problem getting JSON data: " + dataJSON.message);
             }
-            console.log(dataJSON)
             let html = '<input name="otherIndex" class="form-control" style="max-width: 50px;" value="'+path_index+'" readonly="readonly" />';
             document.getElementById('otherIndex').insertAdjacentHTML('beforeend', html);
             document.getElementById('otherCity').value = dataJSON.city;

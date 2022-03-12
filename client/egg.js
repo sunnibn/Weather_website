@@ -24,6 +24,11 @@ window.addEventListener('load', async function (event) {
                 html += '</td>' + '<td class="text-break">'
                 html += othersJSON[i].weather
                 html += '</td>'
+                html += '</td>' + '<td class="text-break">'
+                html += '<button class="btn btn-sm btn-secondary" onclick="deletecheck('+i+')">'
+                html += '<i class="bi bi-trash"></i>'
+                html += '</button>'
+                html += '</td>'
                 html += "</tr>"
                 table.insertAdjacentHTML('beforeend', html)
             }
@@ -34,3 +39,14 @@ window.addEventListener('load', async function (event) {
 		alert("problem: " + error);
 	}
 });
+
+async function deletecheck(idx) {
+    if (window.confirm('Delete this log no.'+'"'+idx+'" ?')) {
+        //delete log
+        let response = await fetch('/egg/delete?index='+idx, {method: 'DELETE'});
+        if (response.ok) {
+            window.alert('Deleted!');
+            location.href = "/egg";
+        }
+    }
+}
