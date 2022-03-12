@@ -5,7 +5,9 @@ const path = require("path"); // path module to send html file
 
 var fs = require('fs');
 var jsonpath = './saves.json';
-var jsonF = require(jsonpath);
+//var jsonF = require(jsonpath);
+var jsondata = fs.readFileSync(jsonpath);
+var jsonobj = JSON.parse(jsondata);
 var logpath = './logs.json';
 //var logF = require(logpath);
 var logdata = fs.readFileSync(logpath);
@@ -26,7 +28,7 @@ app.get('/', function (req, res) {
 
 app.get('/loca-weat', async function (req, res) {
     try {
-        let response = await axios('https://www.metaweather.com/api/location/' + jsonF[0].woeid);
+        let response = await axios('https://www.metaweather.com/api/location/' + jsonobj[0].woeid);
         if (response.status === 200) {
             let woeid_weat = response.data.consolidated_weather[0];
             res.send([response.data.title, woeid_weat.weather_state_name, woeid_weat.weather_state_abbr, response.data.time]);
@@ -93,6 +95,7 @@ app.get('/search/get-city', async function (req, res) {
 
 app.post('/change-city', async function (req, res) {
     try {
+        jsonobj = req.body;
         await fs.writeFile(jsonpath, JSON.stringify(req.body, null, 2), function writeJSON(err) {
             if (err) return console.log(err);
         });
@@ -126,11 +129,12 @@ app.post('/egg/write/submit', async function (req, res) {
             "city": req.body.otherCity,
             "weather": req.body.otherWeat,
         };
+        logobj.push(newLog);
         await fs.writeFile(logpath, JSON.stringify(logobj, null, 2), function writeJSON(err) {
             if (err) return console.log(err);
         });
         //res.send('successfully posted');
-        res.redirect(303, "/egg");
+        res.redirect("/egg");
     } catch (error) {
         res.send({ "message": error.message });
     }

@@ -26,7 +26,17 @@
   },
   {
     "date": "2022-03-02",
-    "city": "m",
+    "city": "mmmm",
     "weather": "Snow"
+  },
+  {
+    "date": "2022-03-31",
+    "city": "sddd",
+    "weather": "Thunderstorm"
+  },
+  {
+    "date": "2022-03-31",
+    "city": "mindpalace",
+    "weather": "Thunderstorm"
   }
 ]
