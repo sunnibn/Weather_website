@@ -1,5 +1,5 @@
 //=====vars=============
-var weather;
+var weather = 'c';
 
 var f = -50;
 var t;
@@ -19,40 +19,96 @@ var hr = d.getHours();
 
 
 //=====navbar set====================
-let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 let DMY = document.getElementById('todayDMY');
-let LW = document.getElementById('loca_weat');
+let T = document.getElementById('todayT');
+let W = document.getElementById('todayW');
+// let LW = document.getElementById('loca_weat');
 
-DMY.insertAdjacentText('beforeend', d.getDate()+' '+months[d.getMonth()]+' '+d.getFullYear()+'   ');
+//---weather+time+DMY
+function timeDisplay() {
+    d = new Date();
+    hr = d.getHours();
+    let h = d.getHours();
+    let m = d.getMinutes();
+    let s = d.getSeconds();
+    let TText = '';
+    if (m < 10) {
+        m = '0'+m;
+    }
+    if (s < 10) {
+        s = '0'+s;
+    }
+    if (h > 12) {
+        h = h-12;
+        if (h < 10) {
+            h = '0'+h;
+        }
+        TText = h+' : '+m+' : '+s+' PM';
+    } else if (h === 12) {
+        TText = h+' : '+m+' : '+s+' PM';
+    } else {
+        TText = h+' : '+m+' : '+s+' AM';
+    }
+    T.innerHTML = TText;
+    let DText =  d.getDate()+' '+months[d.getMonth()]+' '+d.getFullYear();
+    DMY.innerHTML = DText;
+    // T.insertAdjacentText('beforeend', TText);
+    // DMY.insertAdjacentText('beforeend', d.getDate()+' '+months[d.getMonth()]+' '+d.getFullYear()+'   ');
+    setTimeout(timeDisplay, 1000);
+}
+timeDisplay();
 
-window.addEventListener('load', async function (event) {
-	event.preventDefault();
-	try {
-		let response = await fetch("/loca-weat", { method: "GET"});
-		if (response.ok) {
-			let body = await response.text();
-			let locaweatJSON = await JSON.parse(body);
-			if (locaweatJSON.message) {
-                throw new Error("problem getting data from server: " + locaweatJSON.message);
-            }
-            if (locaweatJSON[1]) {
-            	weather = locaweatJSON[2];
-            	hr = parseInt(locaweatJSON[3].substring(11,13));
-            	console.log(hr)
-                LW.insertAdjacentText('beforeend', locaweatJSON[0] + ', ' + locaweatJSON[1]);
-            } else {
-                LW.insertAdjacentText('beforeend', locaweatJSON[0]);
-            }
-		} else {
-            LW.insertAdjacentText('beforeend', 'Error: failed to get location and weather!');
-            throw new Error("problem getting your location and weather: " + response2.code);
-		}
-	} catch (error) {
-        alert("problem: " + error);
+// window.addEventListener('load', async function (event) {
+// 	event.preventDefault();
+// 	try {
+// 		let response = await fetch("/loca-weat", { method: "GET"});
+// 		if (response.ok) {
+// 			let body = await response.text();
+// 			let locaweatJSON = await JSON.parse(body);
+// 			if (locaweatJSON.message) {
+//                 throw new Error("problem getting data from server: " + locaweatJSON.message);
+//             }
+//             if (locaweatJSON[1]) {
+//             	weather = locaweatJSON[2];
+//             	hr = parseInt(locaweatJSON[3].substring(11,13));
+//             	console.log(hr)
+//                 LW.insertAdjacentText('beforeend', locaweatJSON[0] + ', ' + locaweatJSON[1]);
+//             } else {
+//                 LW.insertAdjacentText('beforeend', locaweatJSON[0]);
+//             }
+// 		} else {
+//             LW.insertAdjacentText('beforeend', 'Error: failed to get location and weather!');
+//             throw new Error("problem getting your location and weather: " + response2.code);
+// 		}
+// 	} catch (error) {
+//         alert("problem: " + error);
+//     }
+// });
+
+W.addEventListener('change', function (event) {
+    switch (event.target.value) {
+        case "Clear": weather='c' 
+            break;
+        case "Snow": weather='sn' 
+            break;
+        // case "Sleet": weather='s'
+        case "Hail": weather='h' 
+            break;
+        case "Thunderstorm": weather='t' 
+            break;
+        case "Heavy Rain": weather='hr' 
+            break;
+        case "Light Rain": weather='lr' 
+            break;
+        case "Heavy Cloud": weather='hc' 
+            break;
+        case "Light Cloud": weather='lc' 
+            break;
+        case "Fog": weather='c' 
+            break;
     }
 });
-
-
 
 
 
@@ -66,8 +122,14 @@ function setup() {
 
 function draw() {
 	//===sky & ground setting
-    //hr = 12;
-    //weather = 'lr';
+    // hr = 12;
+    // weather = 'lr';
+    //username & password set.
+    //map, location, time. (similar location->into list.)
+    // new loca-> db add. time add. saved loca -> time add.
+    //location -> user writes 별로 display. time 순으로 나열.
+    //user 검색 가능. display.
+    //글 display with weather. 뒤로가기 버튼...
 	push();
 	if (weather === 'c' || weather === 's' || weather === 'lc') {
 		//---sun 1

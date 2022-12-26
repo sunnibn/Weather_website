@@ -29,3 +29,11 @@ span + span {
 .text-break {
     padding: 5px;
 }
+
+select {
+    padding: 3px;
+    font-family: 'bootstrap-icons';
+}
+option {
+    padding: 3px;
+}
